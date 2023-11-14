@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+ <center>
+  <button  onclick="signIn()">SignIn with Github</button>
+  <div id="show" style="display: none;"></div>
+ </center>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
+    import { getAuth, signInWithPopup, GithubAuthProvider } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-auth.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDLea9UMGRfwDCROPAKlY2Y8ao2kQsRQKE",
+      authDomain: "facebook-auth-47204.firebaseapp.com",
+      projectId: "facebook-auth-47204",
+      storageBucket: "facebook-auth-47204.appspot.com",
+      messagingSenderId: "577127867297",
+      appId: "1:577127867297:web:7d4e3b7f44ec9c6587e1e0"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+    const provider = new GithubAuthProvider();
+    const signIn=()=>{
+      signInWithPopup(auth, provider)
+      .then((result)=>{
+        const user = result.user;
+        console.log(user);
+        show.style.display="block";
+        show.innerHTML +=`
+        <img src="${user.photoURL}" alt="profile picture">
+        <h1>Welcome ${user.displayName}</h1>
+        <p>Here is your email address ${user.email}</p>
+        <p>Phone Number:${user.phonenumber}</p>
+        <p>Creation Time:${user.creationTime}</p>
+       
+        `
+      })
+      .catch((erro)=>{
+      console.log(Error);
+    })
+    }
+    
+    window.signIn=signIn
+  </script>
+</body>
+</html>
