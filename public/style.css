@@ -14,10 +14,10 @@ button {
 }
 #show{
     margin-top: 200px;
-    width: 50%;
+    width: 100%;
     background-color: black;
     color: antiquewhite;
-    height: 30vh;
+    height: auto;
     font-size: 18px;
     font-weight: 500;
     border-radius: 5%;
