@@ -34,25 +34,36 @@
     const auth = getAuth();
     const provider = new GithubAuthProvider();
     const signIn=()=>{
+      alert("working")
       signInWithPopup(auth, provider)
       .then((result)=>{
         const user = result.user;
         console.log(user);
-        show.style.display="block";
+
+        const userObjectDetails = {
+            username: user.displayName,
+            userimage :user.photoURL,
+            useremail :user.email,
+            userid :user.uid,
+            userphone:user.phoneNumber,
+            usercreated:user.metadata.creationTime,
+
+        }
+        window.location.href = "./nextpage.html";
+        localStorage.setItem('userinfo',JSON.stringify(userObjectDetails))
+        show.style.display="none";
         show.innerHTML +=`
         <img src="${user.photoURL}" alt="profile picture width="200px" height="200px" style="border-radius: 100%" >
         <h1>Welcome ${user.displayName}</h1>
         <p>Here is your email address ${user.email}</p>
-        <p>Phone Number:${user.phonenumber}</p>
-        <p>Creation Time:${user.creationTime}</p>
-       
+        <p>Phone Number:${user.phoneNumber}</p>
+        <p>Creation Time:${user.creationTime}</p>       
         `
       })
       .catch((erro)=>{
       console.log(Error);
     })
     }
-    
     window.signIn=signIn
   </script>
 </body>
